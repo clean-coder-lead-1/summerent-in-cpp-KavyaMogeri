@@ -21,15 +21,16 @@ BreachType classifyTemperatureBreach(
 
 double getUpperLimit(CoolingType coolingType){
   int upperLimit = 0;
-  if(coolingType == PASSIVE_COOLING)
-  {
-    upperLimit = 35;    
-  }else if(coolingType == HI_ACTIVE_COOLING)
-  {
-    upperLimit = 45;
-  }else if(coolingType == MED_ACTIVE_COOLING){
-    upperLimit = 40;
-  }
+
+    map<CoolingType, double> coolingTypeUpperLimit;
+
+    coolingTypeUpperLimit.insert({ PASSIVE_COOLING, 35 });
+    coolingTypeUpperLimit.insert({ HI_ACTIVE_COOLING, 45 });
+    oolingTypeUpperLimit.insert({ MED_ACTIVE_COOLING, 40 }); 
+     
+    if(coolingTypeUpperLimit.find(coolingType) != coolingTypeUpperLimit.end()){
+      upperLimit = coolingTypeUpperLimit[coolingType];
+    }       
   return upperLimit;
 }
 
