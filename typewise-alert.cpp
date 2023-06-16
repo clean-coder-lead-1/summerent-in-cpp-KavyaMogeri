@@ -1,6 +1,7 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 #include <map>
+using namespace std;
 
 const double lowerLimit = 0 ;
 
