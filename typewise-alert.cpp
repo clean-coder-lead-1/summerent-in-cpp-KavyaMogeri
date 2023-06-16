@@ -1,5 +1,6 @@
 #include "typewise-alert.h"
 #include <stdio.h>
+#include <bits/stdc++.h>
 
 const double lowerLimit = 0 ;
 
@@ -26,7 +27,7 @@ double getUpperLimit(CoolingType coolingType){
 
     coolingTypeUpperLimit.insert({ PASSIVE_COOLING, 35 });
     coolingTypeUpperLimit.insert({ HI_ACTIVE_COOLING, 45 });
-    oolingTypeUpperLimit.insert({ MED_ACTIVE_COOLING, 40 }); 
+    coolingTypeUpperLimit.insert({ MED_ACTIVE_COOLING, 40 }); 
 
     if(coolingTypeUpperLimit.find(coolingType) != coolingTypeUpperLimit.end()){
       upperLimit = coolingTypeUpperLimit[coolingType];
