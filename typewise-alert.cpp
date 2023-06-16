@@ -1,5 +1,4 @@
 #include "typewise-alert.h"
-#include <stdio.h>
 #include <cstdio>
 #include <bits/stdc++.h>
 
