@@ -1,5 +1,5 @@
 #include "typewise-alert.h"
-#include <cstdio>
+#include <stdio.h>
 #include <bits/stdc++.h>
 
 const double lowerLimit = 0 ;
