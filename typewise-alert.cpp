@@ -16,7 +16,7 @@ BreachType inferBreach(double value, double upperLimit) {
 
 BreachType classifyTemperatureBreach(
     CoolingType coolingType, double temperatureInC) {   
-   return inferBreach(temperatureInC, getUpperLimit);
+   return inferBreach(temperatureInC, getUpperLimit(coolingType));
 }
 
 double getUpperLimit(CoolingType coolingType){
@@ -27,7 +27,7 @@ double getUpperLimit(CoolingType coolingType){
     coolingTypeUpperLimit.insert({ PASSIVE_COOLING, 35 });
     coolingTypeUpperLimit.insert({ HI_ACTIVE_COOLING, 45 });
     oolingTypeUpperLimit.insert({ MED_ACTIVE_COOLING, 40 }); 
-     
+
     if(coolingTypeUpperLimit.find(coolingType) != coolingTypeUpperLimit.end()){
       upperLimit = coolingTypeUpperLimit[coolingType];
     }       
