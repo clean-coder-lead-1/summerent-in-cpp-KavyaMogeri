@@ -30,3 +30,4 @@ void checkAndAlert(
 
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
+double getUpperLimit(CoolingType coolingType)
