@@ -36,19 +36,22 @@ double getUpperLimit(CoolingType coolingType){
   return upperLimit;
 }
 
-void checkAndAlert(
+bool checkAndAlert(
     AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
-
+  bool alertsent = false;
   BreachType breachType = classifyTemperatureBreach(
     batteryChar.coolingType, temperatureInC
   );
 
-  if(TO_CONTROLLER == alertTarget) {
+  if(TO_CONTROLLER == alertTarget) {            
           sendToController(breachType);
+          alertsent = true;
       } else 
-      {
+      {        
         sendToEmail(breachType);
+        alertsent = true;
       }
+      return alertsent;
   }
 
 void sendToController(BreachType breachType) {
