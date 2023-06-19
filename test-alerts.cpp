@@ -16,13 +16,22 @@ TEST_CASE("infers the breach normal temperature") {
 }
 
 TEST_CASE("classify breach Temperature for passive coolong ") {
-  REQUIRE(classifyTemperatureBreach(PASSIVE_COOLING, 42) == TOO_HIGH);
+  BatteryCharacter batteryCharacter;
+  batteryCharacter.brand = "testing";
+  batteryCharacter.coolingType = PASSIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_CONTROLLER, batteryCharacter, 42) == true);
 }
 
 TEST_CASE("classify breach Temperature for active coolong") {
-  REQUIRE(classifyTemperatureBreach(HI_ACTIVE_COOLING, 12) == NORMAL);
+  BatteryCharacter batteryCharacter;
+  batteryCharacter.brand = "testing";
+  batteryCharacter.coolingType = HI_ACTIVE_COOLING;
+  REQUIRE(classifyTemperatureBreach(TO_CONTROLLER,batteryCharacter, 12) == true);
 }
 
 TEST_CASE("classify breach Temperature for med active coolong") {
-  REQUIRE(classifyTemperatureBreach(MED_ACTIVE_COOLING, 35) == NORMAL);
+  BatteryCharacter batteryCharacter;
+  batteryCharacter.brand = "testing";
+  batteryCharacter.coolingType = MED_ACTIVE_COOLING;
+  REQUIRE(classifyTemperatureBreach(TO_EMAIL , batteryCharacter, 35) == true);
 }
