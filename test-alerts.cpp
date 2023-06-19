@@ -2,6 +2,9 @@
 
 #include "test/catch.hpp"
 #include "typewise-alert.h"
+#include <cstring>
+
+using namespace std;
 
 TEST_CASE("infers the breach for Low temperature") {
   REQUIRE(inferBreach(-12, 30) == TOO_LOW);
@@ -37,6 +40,7 @@ TEST_CASE("classify breach Temperature forcheckAndAlert med active coolong") {
   strcpy(batteryCharacter.brand, testbrand.c_str());
   batteryCharacter.coolingType = MED_ACTIVE_COOLING;
   REQUIRE(checkAndAlert(TO_EMAIL , batteryCharacter, 35) == true);
+}
 
   TEST_CASE("No Alert for med active coolong") {
   BatteryCharacter batteryCharacter;
