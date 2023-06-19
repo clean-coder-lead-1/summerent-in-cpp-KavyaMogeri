@@ -46,7 +46,7 @@ bool checkAndAlert(
   if(TO_CONTROLLER == alertTarget) {            
           sendToController(breachType);
           alertsent = true;
-      } else 
+      } else if(TO_EMAIL == alertTarget)
       {        
         sendToEmail(breachType);
         alertsent = true;
