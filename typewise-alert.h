@@ -16,8 +16,9 @@ BreachType inferBreach(double value,double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
 typedef enum {
+  TO_INVALID,
   TO_CONTROLLER,
-  TO_EMAIL
+  TO_EMAIL  
 } AlertTarget;
 
 typedef struct {
