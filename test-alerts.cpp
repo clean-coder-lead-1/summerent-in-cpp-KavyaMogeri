@@ -2,7 +2,66 @@
 
 #include "test/catch.hpp"
 #include "typewise-alert.h"
+#include <cstring>
 
-TEST_CASE("infers the breach according to limits") {
-  REQUIRE(inferBreach(12, 20, 30) == TOO_LOW);
+using namespace std;
+
+TEST_CASE("infers the breach for Low temperature") {
+  REQUIRE(inferBreach(-12, 30) == TOO_LOW);
+}
+
+TEST_CASE("infers the breach for high temperature") {
+  REQUIRE(inferBreach(33, 30) == TOO_HIGH);
+}
+
+TEST_CASE("infers the breach normal temperature") {
+  REQUIRE(inferBreach(30, 30) == NORMAL);
+}
+
+TEST_CASE("checkAndAlert for passive coolong ") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = PASSIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_CONTROLLER, batteryCharacter, 42) == true);
+}
+
+TEST_CASE("checkAndAlert for active coolng") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = HI_ACTIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryCharacter, 12) == true);
+}
+
+TEST_CASE("checkAndAlert for med active cooling") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = MED_ACTIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_EMAIL , batteryCharacter, 35) == true);
+}
+
+  TEST_CASE("No Alert for med active cooling") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = MED_ACTIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_INVALID , batteryCharacter, 35) == false);
+}
+
+TEST_CASE("checkAndAlert for normal temperature ") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = MED_ACTIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_EMAIL , batteryCharacter, 40) == true);
+}
+
+TEST_CASE("checkAndAlert for Invalid cooling temperature ") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = INVALID_COOLING;
+  REQUIRE(checkAndAlert(TO_EMAIL , batteryCharacter, 40) == true);
 }
