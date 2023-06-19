@@ -15,23 +15,33 @@ TEST_CASE("infers the breach normal temperature") {
   REQUIRE(inferBreach(30, 30) == NORMAL);
 }
 
-TEST_CASE("classify breach Temperature for passive coolong ") {
+TEST_CASE("checkAndAlert for passive coolong ") {
   BatteryCharacter batteryCharacter;
-  batteryCharacter.brand = "testing";
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
   batteryCharacter.coolingType = PASSIVE_COOLING;
   REQUIRE(checkAndAlert(TO_CONTROLLER, batteryCharacter, 42) == true);
 }
 
-TEST_CASE("classify breach Temperature for active coolong") {
+TEST_CASE("checkAndAlert for active coolong") {
   BatteryCharacter batteryCharacter;
-  batteryCharacter.brand = "testing";
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
   batteryCharacter.coolingType = HI_ACTIVE_COOLING;
-  REQUIRE(classifyTemperatureBreach(TO_CONTROLLER,batteryCharacter, 12) == true);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryCharacter, 12) == true);
 }
 
-TEST_CASE("classify breach Temperature for med active coolong") {
+TEST_CASE("classify breach Temperature forcheckAndAlert med active coolong") {
   BatteryCharacter batteryCharacter;
-  batteryCharacter.brand = "testing";
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
   batteryCharacter.coolingType = MED_ACTIVE_COOLING;
-  REQUIRE(classifyTemperatureBreach(TO_EMAIL , batteryCharacter, 35) == true);
+  REQUIRE(checkAndAlert(TO_EMAIL , batteryCharacter, 35) == true);
+
+  TEST_CASE("No Alert for med active coolong") {
+  BatteryCharacter batteryCharacter;
+  string testbrand = "testing";
+  strcpy(batteryCharacter.brand, testbrand.c_str());
+  batteryCharacter.coolingType = MED_ACTIVE_COOLING;
+  REQUIRE(checkAndAlert(TO_INVALID , batteryCharacter, 35) == false);
 }
